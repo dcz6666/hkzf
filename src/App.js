@@ -1,21 +1,27 @@
-import { BrowserRouter, Routes,Route,NavLink, Navigate } from 'react-router-dom';
-import { Button,TabBar } from 'antd-mobile-v5' // v5
+import React, { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 
 //导入首页和城市选择两个组件
-import Home from './pages/Home'
-import CityList from './pages/CityList'
+
+//使用动态组件的方式导入
+const Home = lazy(() => import('./pages/Home'));
+const CityList = lazy(() => import('./pages/CityList'))
 
 function App() {
   return (
-    <div className="App">
-      <NavLink to="home">Home</NavLink>
-      <NavLink to="cityList">About</NavLink>
+    <Router>
+      <Suspense fallback={<div className='route-loading'>loading...</div>}>
+        <div className='App'>
+          <Switch>
+            {/* 默认路由匹配时，跳转到 /home 实现路由重定向到首页 */}
+            <Route path="/" exact render={()=><Redirect to="/home" />} />
+            <Route path="/cityList" component={CityList}/>
+            <Route path="/home" component={Home} />
+          </Switch>
+        </div>
+      </Suspense>
+    </Router>
 
-      <Routes>
-        <Route path="/cityList" element={<CityList />}></Route>
-        <Route path="/home" element={<Home />}></Route>
-      </Routes>
-    </div>
   );
 }
 
