@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 const Home = lazy(() => import('./pages/Home'));
 const CityList = lazy(() => import('./pages/CityList'))
 
+const Map = lazy(()=>import('./pages/Map'))
+
 function App() {
   return (
     <Router>
@@ -17,6 +19,7 @@ function App() {
             <Route path="/" exact render={()=><Redirect to="/home" />} />
             <Route path="/cityList" component={CityList}/>
             <Route path="/home" component={Home} />
+            <Route path="/map" component={Map} />
           </Switch>
         </div>
       </Suspense>

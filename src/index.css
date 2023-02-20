@@ -1,16 +1,18 @@
 html,
 body {
-  height: 100%;
+  margin: 0;
+  padding: 0;
   font-family: 'Microsoft YaHei';
   color: #333;
-  background-color: #fff; 
+  background-color: #fff;
 }
 
 * {
   box-sizing: border-box;
-   /* 去掉 轮播图 Chrome浏览器的错误警告 */
-   touch-action: pan-y;
+  /* 去掉 轮播图 Chrome浏览器的错误警告 */
+  touch-action: pan-y;
 }
+
 h1,
 h2,
 h3,
@@ -37,7 +39,7 @@ body,
   overflow: hidden;
 }
 
-.route-loading{
-  padding-top:100px;
+.route-loading {
+  padding-top: 100px;
   text-align: center;
 }
