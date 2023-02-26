@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+
+// 导入封装好的 NavHeader 组件
+// import NavHeader from '../../components/NavHeader'
+
 // 导入样式
 import styles from './index.module.css'
 export default class index extends Component {
@@ -13,6 +17,7 @@ export default class index extends Component {
         return (
             <div className={styles.map}>
               {/* 顶部导航栏组件 */}
+              {/* <NavHeader>地图找房</NavHeader> */}
               {/* 地图容器元素 */}
               <div id="container" className={styles.container} />
       

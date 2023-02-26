@@ -16,7 +16,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-spring": "^8.0.27",
-    "react-virtualized": "^9.21.1",
+    "react-virtualized": "^9.22.3",
     "sass-loader": "^13.2.0",
     "yup": "^0.27.0"
   },

@@ -69,8 +69,8 @@ export default class index extends Component {
     this.getGroups()
     this.getNews()
 
+    // 获取当前城市的方法
    const curCity = await getCurrentCity()
-   console.log("==curCity==",curCity);
     this.setState({
       curCityName: curCity.label
     })
