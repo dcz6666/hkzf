@@ -2,7 +2,8 @@ import React from 'react'
 import { NavBar } from 'antd-mobile'
 // 导入 withRouter 高阶组件
 import { withRouter } from 'react-router-dom'
-
+// 导入样式
+import styles from './index.module.css'
 // 导入 props 校验的包
 import PropTypes from 'prop-types'
 
@@ -29,4 +30,14 @@ function NavHeader({
         </NavBar>
     )
 }
+
+// 添加props校验
+NavHeader.propTypes = {
+    children: PropTypes.string.isRequired,
+    onLeftClick: PropTypes.func,
+    className: PropTypes.string,
+    rightContent: PropTypes.array
+}
+// withRouter(NavHeader) 函数的返回值也是一个组件
+export default withRouter(NavHeader)
 

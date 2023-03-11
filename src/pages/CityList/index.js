@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { NavBar,Toast } from 'antd-mobile'
+import {Toast } from 'antd-mobile'
 import axios from 'axios'
 import { List, AutoSizer } from 'react-virtualized';
+// 导入封装好的 NavHeader 组件
+import NavHeader from '../../components/NavHeader'
 // 导入utils中获取定位城市的方法
 import { getCurrentCity } from '../../utils';
 import './index.css'
@@ -22,20 +24,20 @@ function formatCityIndex(letter) {
 }
 
 //有房源的城市
-const HOUSE_CITY = ['北京','上海','广州','深圳']
+const HOUSE_CITY = ['北京', '上海', '广州', '深圳']
 export default class index extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             cityIndex: [],
             cityList: {},
-            activeIndex:0 //指定右侧字索引列表高亮的引号
+            activeIndex: 0 //指定右侧字索引列表高亮的引号
         }
         //创建ref对象
         this.cityListComponent = React.createRef()
     }
 
- 
+
 
     async componentDidMount() {
         await this.getCityList()
@@ -89,12 +91,12 @@ export default class index extends Component {
     }
 
     // 
-    changeCity({label,value}){
-        if(HOUSE_CITY.indexOf(label)>-1){
-            localStorage.setItem('hkzf_city', JSON.stringify({label,value}))
+    changeCity({ label, value }) {
+        if (HOUSE_CITY.indexOf(label) > -1) {
+            localStorage.setItem('hkzf_city', JSON.stringify({ label, value }))
             this.props.history.go(-1)
-        }else{
-            Toast.info("该城市暂无房源数据",1)
+        } else {
+            Toast.info("该城市暂无房源数据", 1)
         }
     }
 
@@ -108,11 +110,11 @@ export default class index extends Component {
     //封装渲染右侧索引列表的方法
     renderCityIndex() {
         //获取到cityIndex,并遍历其，实现渲染
-        let { cityIndex,activeIndex } = this.state
+        let { cityIndex, activeIndex } = this.state
         console.log("cityIndex====123", cityIndex);
-        return cityIndex.map((item,index) => (
-            <li className="city-index-item" key={item} onClick={()=>{
-                console.log("index",index);
+        return cityIndex.map((item, index) => (
+            <li className="city-index-item" key={item} onClick={() => {
+                console.log("index", index);
                 this.cityListComponent.current.scrollToRow(index)
             }}>
                 <span className={activeIndex == index ? 'index-active' : ''}>
@@ -150,10 +152,10 @@ export default class index extends Component {
             </div>
         );
     }
-    onRowsRendered=({startIndex})=>{
-        console.log("startIndex",startIndex);
-        if(this.state.activeIndex !=startIndex){
-            this.setState({activeIndex:startIndex})
+    onRowsRendered = ({ startIndex }) => {
+        console.log("startIndex", startIndex);
+        if (this.state.activeIndex != startIndex) {
+            this.setState({ activeIndex: startIndex })
         }
     }
 
@@ -162,13 +164,7 @@ export default class index extends Component {
     render() {
         return (
             <div className="citylist">
-                <NavBar
-                    className="navbar"
-                    mode="light"
-                    icon={<i className="iconfont icon-back" />}
-                    onLeftClick={() => this.props.history.go(-1)}
-                >城市选择</NavBar>
-
+                <NavHeader>城市选择</NavHeader>
                 {/* c城市列表 */}
                 <AutoSizer>
                     {

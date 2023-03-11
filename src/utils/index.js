@@ -4,17 +4,16 @@ import axios from 'axios'
 // 2 创建并导出获取定位城市的函数 getCurrentCity
 export const getCurrentCity = () => {
     // 3 判断 localStorage 中是否有定位城市
-    const localCity = JSON.parse(localStorage.getItem('hkzf_city'))
+    const localCity = JSON.parse(localStorage.getItem('hkzf_city'));
     if (!localCity) {
       // 4 如果没有，就使用首页中获取定位城市的代码来获取，并且存储到本地存储中，然后返回该城市数据
       return new Promise((resolve, reject) => {
-        const curCity = new window.BMapGL.LocalCity()
+        const curCity = new window.BMap.LocalCity()
         curCity.get(async res => {
           try {
             const result = await axios.get(
               `http://localhost:8080/area/info?name=${res.name}`
             )
-            // result.data.body => { label: '上海', value: '' }
   
             // 存储到本地存储中
             localStorage.setItem('hkzf_city', JSON.stringify(result.data.body))
@@ -24,6 +23,7 @@ export const getCurrentCity = () => {
           } catch (e) {
             // 获取定位城市失败
             reject(e)
+            console.log("获取定位城市失败",e)
           }
         })
       })
@@ -35,11 +35,8 @@ export const getCurrentCity = () => {
     return Promise.resolve(localCity)
   }
 
-export { BASE_URL } from './url'
-// 导出 auth 模块中的所有内容
-// export { API } from './api'
-// export { BASE_URL } from './url'
-// 导出 auth 模块中的所有内容
-// export * from './auth'
-
-// export * from './city'
+  // export { API } from './api'
+  export { BASE_URL } from './url'
+  // 导出 auth 模块中的所有内容
+  // export * from './auth'
+  // export * from './city'
